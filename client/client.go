@@ -238,7 +238,7 @@ type ImportOrderRequest struct {
 	// 客户请求流水号
 	RequestNo *string `json:"request_no,omitempty" xml:"request_no,omitempty" require:"true"`
 	// 客户号码列表
-	Customers *CustomerItem `json:"customers,omitempty" xml:"customers,omitempty" require:"true"`
+	Customers []*CustomerItem `json:"customers,omitempty" xml:"customers,omitempty" require:"true" type:"Repeated"`
 	// 手机号传入格式:PLAIN明文 / MD5 / SHA256，不填即为默认PLAIN
 	MobileFormat *string `json:"mobile_format,omitempty" xml:"mobile_format,omitempty"`
 }
@@ -266,7 +266,7 @@ func (s *ImportOrderRequest) SetRequestNo(v string) *ImportOrderRequest {
 	return s
 }
 
-func (s *ImportOrderRequest) SetCustomers(v *CustomerItem) *ImportOrderRequest {
+func (s *ImportOrderRequest) SetCustomers(v []*CustomerItem) *ImportOrderRequest {
 	s.Customers = v
 	return s
 }
@@ -466,7 +466,7 @@ func (client *Client) DoRequest(version *string, action *string, protocol *strin
 				"req_msg_id":       antchainutil.GetNonce(),
 				"access_key":       client.AccessKeyId,
 				"base_sdk_version": tea.String("TeaSDK-2.0"),
-				"sdk_version":      tea.String("1.0.2"),
+				"sdk_version":      tea.String("1.0.3"),
 				"_prod_code":       tea.String("AICONUMDECISION"),
 				"_prod_channel":    tea.String("default"),
 			}
